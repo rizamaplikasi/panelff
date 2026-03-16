@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ULTIMATE NEON PANEL | RIZAM STUDIO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap');
+
+        body {
+            background: radial-gradient(circle at center, #05051a 0%, #000 100%);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+            touch-action: pan-y; /* Mencegah refresh saat swipe horizontal */
+        }
+
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            animation: moveStars 120s linear infinite;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+
+        .neon-box {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+
+        .tab-btn { transition: all 0.3s ease; }
+        .tab-btn.active {
+            background: rgba(0, 255, 255, 0.2);
+            border-bottom: 2px solid #00ffff;
+            color: #00ffff;
+        }
+
+        .hidden { display: none !important; }
+
+        .character-img {
+            filter: drop-shadow(0 0 20px #00ffff);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            background: #002222;
+            height: 6px;
+            border-radius: 5px;
+            border: 1px solid #00ffff;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+            cursor: pointer;
+        }
+
+        /* Animasi Transisi Halus saat Swipe */
+        .tab-content {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="p-2 md:p-6 h-screen flex flex-col">
+
+    <div class="stars"></div>
+
+    <div id="login-screen" class="flex-1 flex flex-col items-center justify-center p-4">
+        <div class="w-full max-w-sm mb-4 overflow-hidden rounded-lg border border-cyan-500/30 bg-black/40">
+            <marquee class="py-2 text-[10px] font-bold tracking-[0.2em] text-cyan-400 glow-text uppercase">
+                Jangan lupa follow akun tiktok saya @fathurrizam_ • ByPass AMAN 100% • Easy Drag 40%  •  buat yang mau beli panel super gacor nembak badan hs chat wa  
+            </marquee>
+        </div>
+
+        <div class="neon-box p-8 rounded-3xl text-center max-w-sm w-full border-t-4 border-cyan-500">
+            <h1 class="text-3xl font-black text-cyan-400 mb-2 italic tracking-widest glow-text">DRAGON V3</h1>
+            <p class="text-[10px] text-gray-500 mb-6 uppercase tracking-[0.3em]">Injector By RizamMODDER</p>
+            
+            <input type="password" id="pass" class="w-full p-4 bg-black border border-cyan-900 rounded-xl mb-4 text-center outline-none focus:border-cyan-400 text-cyan-400 font-mono" placeholder="Masukkan Key disini">
+            
+            <button onclick="checkLogin()" class="w-full bg-cyan-600 py-4 rounded-xl font-black hover:bg-cyan-400 transition-all text-black uppercase tracking-widest mb-4">
+                <i class="fas fa-bolt mr-2"></i> LOGIN
+            </button>
+            
+            <a href="https://wa.me/6285608906983?text=Tolong%20Berikan%20Saya%20Key%20Injector%20Panel" target="_blank" class="text-cyan-400 text-[10px] uppercase font-bold hover:underline">Minta Key</a>
+        </div>
+    </div>
+
+    <div id="main-panel" class="hidden flex-1 flex flex-col overflow-hidden">
+        <div class="flex flex-wrap justify-between items-center mb-4 gap-4 p-4 neon-box rounded-2xl">
+            <h1 class="text-xl font-black text-cyan-400 tracking-tighter">Dragon Injector V3 <span class="text-white text-xs font-light">| GLOBAL PANEL</span></h1>
+            <button onclick="logout()" class="text-[10px] bg-red-900/30 border border-red-500 px-3 py-1 rounded text-red-400 hover:bg-red-600 hover:text-white transition">LOGOUT SESSION</button>
+        </div>
+
+        <div class="flex-1 flex flex-col md:flex-row gap-4 overflow-hidden">
+            <aside id="sidebar-tabs" class="w-full md:w-56 flex md:flex-col gap-2 overflow-x-auto md:overflow-y-auto pb-2 md:pb-0">
+                <button onclick="openTab('aim')" id="btn-aim" class="tab-btn active w-full p-4 rounded-xl text-left text-[10px] font-bold shrink-0 md:shrink-1">
+                    <i class="fas fa-crosshairs mr-2"></i> COMBAT CORE
+                </button>
+                <button onclick="openTab('ghost')" id="btn-ghost" class="tab-btn w-full p-4 rounded-xl text-left text-[10px] font-bold shrink-0 md:shrink-1">
+                    <i class="fas fa-ghost mr-2"></i> GHOST MODS
+                </button>
+                <button onclick="openTab('visual')" id="btn-visual" class="tab-btn w-full p-4 rounded-xl text-left text-[10px] font-bold shrink-0 md:shrink-1">
+                    <i class="fas fa-eye mr-2"></i> VISUAL ESP
+                </button>
+                <button onclick="openTab('weapon')" id="btn-weapon" class="tab-btn w-full p-4 rounded-xl text-left text-[10px] font-bold shrink-0 md:shrink-1">
+                    <i class="fas fa-bomb mr-2"></i> WEAPONRY
+                </button>
+            </aside>
+
+            <section id="swipe-container" class="flex-1 neon-box rounded-3xl p-6 overflow-y-auto relative">
+                <div id="tab-aim" class="tab-content">
+                    <h2 class="text-cyan-400 text-sm font-black mb-6 uppercase border-b border-cyan-900 pb-2 italic">Combat Module</h2>
+                    <div class="space-y-6">
+                        <div class="bg-cyan-950/20 p-4 rounded-xl border border-cyan-900">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-[10px] font-bold tracking-widest uppercase">Aim FOV Radius</span>
+                                <span id="fov-val" class="text-cyan-400 font-mono text-xs">50%</span>
+                            </div>
+                            <input type="range" id="fov-range" min="0" max="100" value="50" class="w-full" oninput="updateFov(this.value)">
+                        </div>
+                        <label class="flex justify-between items-center text-xs">AUTO HEADSHOT <input type="checkbox" class="w-5 h-5 accent-cyan-400"></label>
+                        <label class="flex justify-between items-center text-xs">AIM LOCK <input type="checkbox" class="w-5 h-5 accent-cyan-400"></label>
+                    </div>
+                </div>
+
+                <div id="tab-ghost" class="tab-content hidden">
+                    <h2 class="text-purple-400 text-sm font-black mb-6 uppercase border-b border-purple-900 pb-2 italic">Ghost Module</h2>
+                    <label class="flex justify-between items-center text-xs">GHOST MODE <input type="checkbox" class="w-5 h-5 accent-purple-400"></label>
+                </div>
+
+                <div id="tab-visual" class="tab-content hidden">
+                    <h2 class="text-green-400 text-sm font-black mb-6 uppercase border-b border-green-900 pb-2 italic">Visual Module</h2>
+                    <label class="flex justify-between items-center text-xs">ESP LINE <input type="checkbox" class="w-5 h-5 accent-green-400"></label>
+                </div>
+
+                <div id="tab-weapon" class="tab-content hidden">
+                    <h2 class="text-pink-400 text-sm font-black mb-6 uppercase border-b border-pink-900 pb-2 italic">Weapon Module</h2>
+                    <label class="flex justify-between items-center text-xs">NO RECOIL <input type="checkbox" class="w-5 h-5 accent-pink-400"></label>
+                </div>
+            </section>
+
+            <aside class="w-full md:w-64 flex flex-col gap-4">
+                <div class="flex-1 neon-box rounded-3xl flex items-center justify-center p-4 relative overflow-hidden h-40 md:h-auto">
+                    <img src="https://i.ibb.co/L5hYf1S/image.png" class="character-img max-h-full object-contain z-10">
+                </div>
+                <div class="neon-box p-4 rounded-2xl h-32 overflow-y-auto font-mono text-[9px] text-cyan-400" id="logs">
+                    > System Booted...
+                </div>
+            </aside>
+        </div>
+
+        <button onclick="execute()" class="mt-4 py-4 bg-gradient-to-r from-cyan-600 to-blue-800 rounded-2xl font-black text-lg tracking-widest shadow-[0_0_30px_rgba(0,255,255,0.3)]">
+            Done
+        </button>
+    </div>
+
+    <script>
+        // Data Global
+        const tabsList = ['aim', 'ghost', 'visual', 'weapon'];
+        let currentIdx = 0;
+
+        window.onload = function() {
+            if(localStorage.getItem("rizam_session") === "active") {
+                showPanel();
+            }
+            setupSwipe();
+        }
+
+        function checkLogin() {
+            const val = document.getElementById('pass').value.toUpperCase();
+            if(val === "RIZAM") {
+                localStorage.setItem("rizam_session", "active");
+                showPanel();
+            } else {
+                alert("ACCESS DENIED: INVALID LICENSE KEY");
+            }
+        }
+
+        function showPanel() {
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('main-panel').classList.remove('hidden');
+            logAction("Session Verified. Access Granted.");
+        }
+
+        function logout() {
+            localStorage.removeItem("rizam_session");
+            location.reload();
+        }
+
+        // Fungsi Ganti Tab (Bisa dipanggil dari tombol atau swipe)
+        function openTab(tabName) {
+            currentIdx = tabsList.indexOf(tabName);
+            
+            // Sembunyikan semua tab
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            // Reset status tombol
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            // Aktifkan tab & tombol yang dipilih
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            document.getElementById('btn-' + tabName).classList.add('active');
+            
+            // Auto-scroll sidebar jika di mobile agar tombol aktif selalu kelihatan
+            document.getElementById('btn-' + tabName).scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            
+            logAction("Active Module: " + tabName.toUpperCase());
+        }
+
+        // SISTEM SWIPE
+        function setupSwipe() {
+            const container = document.getElementById('swipe-container');
+            let startX = 0;
+            let endX = 0;
+
+            container.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            }, {passive: true});
+
+            container.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                const distance = startX - endX;
+                const sensitivity = 50; // Jarak minimum geser
+
+                if (Math.abs(distance) > sensitivity) {
+                    if (distance > 0) {
+                        // Geser ke Kiri (Next Tab)
+                        if (currentIdx < tabsList.length - 1) {
+                            openTab(tabsList[currentIdx + 1]);
+                        }
+                    } else {
+                        // Geser ke Kanan (Prev Tab)
+                        if (currentIdx > 0) {
+                            openTab(tabsList[currentIdx - 1]);
+                        }
+                    }
+                }
+            }, {passive: true});
+        }
+
+        function updateFov(val) {
+            document.getElementById('fov-val').innerText = val + "%";
+            logAction("FOV Calibration: " + val + "%");
+        }
+
+        function logAction(msg) {
+            const logs = document.getElementById('logs');
+            logs.innerHTML += `<br>> [${new Date().toLocaleTimeString()}] ${msg}`;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function execute() {
+            logAction("Infiltrating Database...");
+            setTimeout(() => {
+                logAction("SUCCESS: Modules Synced!");
+                alert("Dragon V3: Settings Applied!");
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
